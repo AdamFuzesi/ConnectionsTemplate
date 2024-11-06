@@ -25,12 +25,18 @@ export default function GameModal(props: GameModalProps) {
     if (!boundingBox) return;
 
     if (
+
       e.clientX < boundingBox?.left ||
+
       e.clientX > boundingBox?.right ||
+
       e.clientY < boundingBox?.top ||
+
       e.clientY > boundingBox?.bottom
+      
     ) {
       props.onClose();
+      
     }
   };
 
