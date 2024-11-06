@@ -49,7 +49,7 @@ export default function Home() {
 
     switch (result.result) {
       case "same":
-        showPopup("You've already guessed that!");
+        showPopup("You've already guessed that tihihi");
         break;
       case "one-away":
         animateWrongGuess();
@@ -131,10 +131,11 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center w-11/12 md:w-3/4 lg:w-7/12 mx-auto mt-14">
         <h1 className="text-black text-4xl font-semibold my-4 ml-4">
-          Connections
+          Connections... but better
+
         </h1>
         <hr className="mb-4 md:mb-4 w-full"></hr>
-        <h1 className="text-black mb-4">Create four groups of four!</h1>
+        <h1 className="text-black mb-4"> Groups of 4, You know the drill </h1>
         <div className="relative w-full">
           <Popup show={popupState.show} message={popupState.message} />
           <Grid
@@ -147,7 +148,7 @@ export default function Home() {
           />
         </div>
         <h2 className="text-black my-4 md:my-8 mx-8">
-          Mistakes Remaining:{" "}
+          Mistakes Remaining (Dont sell):{" "}
           {mistakesRemaining > 0 ? Array(mistakesRemaining).fill("•") : ""}
         </h2>
         {renderControlButtons()}

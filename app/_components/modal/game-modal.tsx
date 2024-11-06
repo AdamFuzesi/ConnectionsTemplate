@@ -20,7 +20,6 @@ export default function GameModal(props: GameModalProps) {
     }
   }, [props.isOpen]);
 
-  // If clicked outside bounding rect, close
   const handleClickOutside = (e: React.MouseEvent<HTMLDialogElement>) => {
     const boundingBox = dialogRef.current?.getBoundingClientRect();
     if (!boundingBox) return;
