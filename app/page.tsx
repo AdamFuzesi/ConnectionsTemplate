@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState, useCallback } from "react";
+import StartModal from "./_components/modal/StartModal";
 import ControlButton from "./_components/button/control-button";
 import Grid from "./_components/game/grid";
 import GameLostModal from "./_components/modal/game-lost-modal";
@@ -13,6 +14,9 @@ import { SubmitResult, Word } from "./_types";
 import { getPerfection } from "./_utils";
 
 export default function Home() {
+  const [showStartModal, setShowStartModal] = useState(true);
+
+  // Existing game logic and state variables
   const [popupState, showPopup] = usePopup();
   const {
     gameWords,
@@ -49,7 +53,7 @@ export default function Home() {
 
     switch (result.result) {
       case "same":
-        showPopup("You've already guessed that tihihi");
+        showPopup("You've already guessed that");
         break;
       case "one-away":
         animateWrongGuess();
@@ -127,32 +131,38 @@ export default function Home() {
     }
   };
 
+  const handleStart = () => {
+    setShowStartModal(false);
+  };
+
   return (
     <>
-      <div className="flex flex-col items-center w-11/12 md:w-3/4 lg:w-7/12 mx-auto mt-14">
-        <h1 className="text-black text-4xl font-semibold my-4 ml-4">
-          Connections... but better
-
-        </h1>
-        <hr className="mb-4 md:mb-4 w-full"></hr>
-        <h1 className="text-black mb-4"> Groups of 4, You know the drill </h1>
-        <div className="relative w-full">
-          <Popup show={popupState.show} message={popupState.message} />
-          <Grid
-            words={gameWords}
-            selectedWords={selectedWords}
-            onClick={onClickCell}
-            clearedCategories={clearedCategories}
-            guessAnimationState={guessAnimationState}
-            wrongGuessAnimationState={wrongGuessAnimationState}
-          />
+      <StartModal isOpen={showStartModal} onStart={handleStart} />
+      {!showStartModal && (
+        <div className="flex flex-col items-center w-11/12 md:w-3/4 lg:w-7/12 mx-auto mt-14">
+          <h1 className="text-black text-4xl font-semibold my-4 ml-4">
+            Connections... but better
+          </h1>
+          <hr className="mb-4 md:mb-4 w-full"></hr>
+          <h1 className="text-black mb-4">Groups of 4, You know the drill</h1>
+          <div className="relative w-full">
+            <Popup show={popupState.show} message={popupState.message} />
+            <Grid
+              words={gameWords}
+              selectedWords={selectedWords}
+              onClick={onClickCell}
+              clearedCategories={clearedCategories}
+              guessAnimationState={guessAnimationState}
+              wrongGuessAnimationState={wrongGuessAnimationState}
+            />
+          </div>
+          <h2 className="text-black my-4 md:my-8 mx-8">
+            Mistakes Remaining:{" "}
+            {mistakesRemaining > 0 ? Array(mistakesRemaining).fill("•") : ""}
+          </h2>
+          {renderControlButtons()}
         </div>
-        <h2 className="text-black my-4 md:my-8 mx-8">
-          Mistakes Remaining (Dont sell):{" "}
-          {mistakesRemaining > 0 ? Array(mistakesRemaining).fill("•") : ""}
-        </h2>
-        {renderControlButtons()}
-      </div>
+      )}
       <GameWonModal
         isOpen={showGameWonModal}
         onClose={() => setShowGameWonModal(false)}

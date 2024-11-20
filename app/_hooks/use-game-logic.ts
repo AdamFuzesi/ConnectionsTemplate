@@ -12,7 +12,7 @@ export default function useGameLogic() {
   const [clearedCategories, setClearedCategories] = useState<Category[]>([]);
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
-  const [mistakesRemaining, setMistakesRemaning] = useState(4);
+  const [mistakesRemaining, setMistakesRemaning] = useState(5);
   const guessHistoryRef = useRef<Word[][]>([]);
 
   useEffect(() => {

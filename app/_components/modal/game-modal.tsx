@@ -13,11 +13,16 @@ export default function GameModal(props: GameModalProps) {
   const dialogRef = React.useRef<HTMLDialogElement>(null);
   // Open close
   React.useEffect(() => {
+
     if (props.isOpen) {
       dialogRef.current?.showModal();
-    } else {
+    } 
+    
+    else {
+
       dialogRef.current?.close();
     }
+
   }, [props.isOpen]);
 
   const handleClickOutside = (e: React.MouseEvent<HTMLDialogElement>) => {

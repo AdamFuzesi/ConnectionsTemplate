@@ -5,6 +5,7 @@ export const shuffleArray = <T>(array: T[]): T[] => {
     const j = Math.floor(Math.random() * (i + 1));
     // Swap elements array[i] and array[j]
     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    // logic for shufflgin the cards
   }
 
   return shuffledArray;
